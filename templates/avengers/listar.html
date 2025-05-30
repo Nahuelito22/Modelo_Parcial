@@ -1,0 +1,65 @@
+{% extends 'layout.html' %}
+
+{% block title %}Lista Avengers {% endblock %}
+
+{% block body %}
+<div class="row">
+  <div class="col-md-5 p-5">
+    {% include 'partials/_message.html' %} 
+    
+    {# <h2 class="mb-4">Agregar Nuevo Avenger</h2> #}
+    {# <form action="{{ url_for('heroes_bp.add_avenger') }}" method="POST"> #}
+    {#     ... Campos del formulario ... #}
+    {#     <button type="submit" class="btn btn-success">Guardar Avenger</button> #}
+    {# </form> #}
+    <a href="{{ url_for('heroes_bp.add_avenger_form') }}" class="btn btn-primary mb-3">Agregar Nuevo Avenger</a>
+
+  </div>
+  <div class="col-md-7 p-5">
+    <h2 class="mb-4">Lista de Miembros Avengers</h2>
+    <table class="table table-dark table-striped align-middle">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Alias</th>
+          <th>Habilidades</th>
+          <th>Actor</th> 
+          <th>Acciones</th> {# Columna para los botones de editar/eliminar #}
+        </tr>
+      </thead>
+      <tbody>
+        {% for avn in vengadores %} 
+        <tr>
+          <td>{{ avn.nombre }}</td>
+          <td>{{ avn.alias }}</td> {# Corregido: Usar 'avn.alias' #}
+          <td>
+            {% if avn.habilidades is iterable and avn.habilidades is not string %}
+              <ul>
+              {% for habilidad in avn.habilidades %}
+                <li>{{ habilidad }}</li>
+              {% endfor %}
+              </ul>
+            {% else %}
+              {# Si habilidades no es una lista (ej. una cadena JSON sin parsear) #}
+              {{ avn.habilidades }}
+            {% endif %}
+          </td>
+          <td>{{ avn.actor }}</td> {# Corregido: Usar 'avn.actor' #}
+          <td>
+            {# Botones de acción para cada Avenger #}
+            <a href="{{ url_for('heroes_bp.edit_avenger', avenger_id=avn.id) }}" class="btn btn-outline-primary btn-sm me-2">Editar</a>
+            <form action="{{ url_for('heroes_bp.delete_avenger', avenger_id=avn.id) }}" method="POST" style="display: inline;" onsubmit="return confirm('¿Estás seguro que quieres eliminar a {{ avn.alias }}?');">
+              <button type="submit" class="btn btn-outline-danger btn-sm">Eliminar</button>
+            </form>
+          </td>
+        </tr>
+        {% else %} {# Este bloque se ejecuta si 'vengadores' está vacía #}
+        <tr>
+            <td colspan="5" class="text-center">No hay Avengers registrados.</td> {# Colspan ajustado a 5 #}
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

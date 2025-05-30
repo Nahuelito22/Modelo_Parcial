@@ -7,8 +7,6 @@ from models.db import db
 
 # Creamos el blueprint para Vengador
 heroes_bp = Blueprint(' heroes_bp', __name__)
-<<<<<<< HEAD
-=======
 
 # GET / Obtener todas las vos vengadores    
 @heroes_bp.route("/", methods=["GET"])
@@ -32,4 +30,9 @@ def get_vengador(id):
         print(f"Error al obtener el vengador: {e}")
         abort(500)
 
->>>>>>> main
+
+@heroes_bp.route('/listar', methods=['GET']) # Puse '/listar' como ejemplo de URL
+def get_heroes():
+    vengadores = Vengador.query.all()  
+    
+    return render_template('/avengers/listar.html', vengadores=vengadores), 200
