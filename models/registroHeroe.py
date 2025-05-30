@@ -14,4 +14,9 @@ class Vengador(db.Model):
 
     def __repr__(self):
         # Método para mostrar una representación legible del objeto (útil para debug)
+<<<<<<< HEAD
         return f"<vengador {self.nombre} (id={self.id})>"
+=======
+        return f"<vengadores {self.nombre} (id={self.id})>"
+    
+>>>>>>> main
