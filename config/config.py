@@ -1,16 +1,6 @@
 from dotenv import load_dotenv
 import os
 
-<<<<<<< HEAD
-load_dotenv()
-
-user = os.getenv("MYSQL_USER")
-password = os.getenv("MYSQL_PASSWORD")
-host = os.getenv("MYSQL_HOST")
-database = os.getenv("MYSQL_DB")
-
-DATABASE_CONNECTION_URI = f"mysql+pymysql://{user}:{password}@{host}/{database}"
-=======
 # Cargar variables del archivo .env
 load_dotenv()
 
@@ -28,4 +18,3 @@ class Config:
     )
 
     SQLALCHEMY_TRACK_MODIFICATIONS = False
->>>>>>> 61dcdb88c8aab737b8a0722d984639d23d69b880

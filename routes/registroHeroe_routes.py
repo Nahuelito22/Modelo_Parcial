@@ -6,4 +6,4 @@ from models.registroHeroe import Vengador
 from models.db import db
 
 # Creamos el blueprint para Vengador
-variedadUva_bp = Blueprint(' heroes_bp', __name__)
+heroes_bp = Blueprint(' heroes_bp', __name__)

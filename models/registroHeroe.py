@@ -1,7 +1,7 @@
 import uuid
 from models.db import db  
 
-class VariedadUva(db.Model):
+class Vengador(db.Model):
     __tablename__ = 'Vengador'  # Nombre explícito para la tabla en la base de datos
 
     id = db.Column(db.String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
@@ -14,4 +14,4 @@ class VariedadUva(db.Model):
 
     def __repr__(self):
         # Método para mostrar una representación legible del objeto (útil para debug)
-        return f"<VariedadUva {self.nombre} (id={self.id})>"
+        return f"<vengador {self.nombre} (id={self.id})>"

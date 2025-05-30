@@ -3,6 +3,7 @@ from flask import Flask , render_template
 from config.config import Config 
 from models.db import db
 from models import registroHeroe
+from routes.registroHeroe_routes import heroes_bp
 
 
 # Creamos la app, configuraciones e importaciones
