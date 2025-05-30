@@ -32,7 +32,6 @@ def get_vengador(id):
 
 # POST / Crear un nuevo vengador
 @heroes_bp.route("/", methods=["POST"])         
-
 def create_vengador():
     try:
         # Obtenemos los datos del formulario
@@ -64,4 +63,45 @@ def create_vengador():
     except Exception as e:
         print(f"Error al crear el vengador: {e}")
         flash("Error al crear el vengador", "error")
+        return redirect(request.referrer)
+
+# PUT / Actualizar un vengador existente        
+@heroes_bp.route("/<string:id>", methods=["PUT"])
+def update_vengador(id):
+    try:
+        # Buscamos el vengador por ID
+        vengador = Vengador.query.get_or_404(id)
+
+        # Obtenemos los datos del formulario
+        vengador.nombre = request.form.get("nombre", vengador.nombre)
+        vengador.alias = request.form.get("alias", vengador.alias)
+        vengador.habilidades = request.form.get("habilidades", vengador.habilidades)
+        vengador.actor = request.form.get("actor", vengador.actor)
+
+        # Guardamos los cambios en la base de datos
+        db.session.commit()
+
+        flash("Vengador actualizado exitosamente", "success")
+        return redirect(f"/vengadores/{id}")  # Redirigimos a la vista del vengador actualizado
+    except Exception as e:
+        print(f"Error al actualizar el vengador: {e}")
+        flash("Error al actualizar el vengador", "error")
+        return redirect(request.referrer)
+    
+# DELETE / Eliminar un vengador
+@heroes_bp.route("/<string:id>", methods=["DELETE"])    
+def delete_vengador(id):
+    try:
+        # Buscamos el vengador por ID
+        vengador = Vengador.query.get_or_404(id)
+
+        # Eliminamos el vengador de la base de datos
+        db.session.delete(vengador)
+        db.session.commit()
+
+        flash("Vengador eliminado exitosamente", "success")
+        return redirect("/vengadores")  # Redirigimos a la lista de vengadores
+    except Exception as e:
+        print(f"Error al eliminar el vengador: {e}")
+        flash("Error al eliminar el vengador", "error")
         return redirect(request.referrer)
