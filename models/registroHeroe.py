@@ -6,10 +6,10 @@ class VariedadUva(db.Model):
 
     id = db.Column(db.String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
     nombre = db.Column(db.String(100), nullable=False)
-    apellido = db.Column(db.String(100), nullable=True)
-    fechaNacimiento = db.Column(db.String(200), nullable=True)
-    poder = db.Column(db.String(100), nullable=True)
-    equipo = db.Column(db.String(100), nullable=True)
+    alias = db.Column(db.String(100), nullable=True)
+    habilidades = db.Column(db.String(100), nullable=True)
+    actor = db.Column(db.String(200), nullable=True)
+
     
 
     def __repr__(self):
