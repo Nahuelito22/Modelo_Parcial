@@ -14,4 +14,5 @@ class VariedadUva(db.Model):
 
     def __repr__(self):
         # Método para mostrar una representación legible del objeto (útil para debug)
-        return f"<VariedadUva {self.nombre} (id={self.id})>"
+        return f"<vengadores {self.nombre} (id={self.id})>"
+    
