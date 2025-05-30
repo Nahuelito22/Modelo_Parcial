@@ -21,7 +21,7 @@ def create_app():
         db.create_all()  # Aquí se crean las tablas si no existen
     
     # Registramos los blueprints
-    app.register_blueprint(Vengador_bp, url_prefix="/variedades") # Se usa el url_prefix para acortar la ruta en routes y definirla directamente aca
+    app.register_blueprint(Vengador_bp, url_prefix="/vengador") # Se usa el url_prefix para acortar la ruta en routes y definirla directamente aca
 
     
     return app
