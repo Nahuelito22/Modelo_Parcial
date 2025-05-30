@@ -2,12 +2,15 @@ import uuid
 from models.db import db  
 
 class VariedadUva(db.Model):
-    __tablename__ = 'variedad_uva'  # Nombre explícito para la tabla en la base de datos
+    __tablename__ = 'Vengador'  # Nombre explícito para la tabla en la base de datos
 
     id = db.Column(db.String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
     nombre = db.Column(db.String(100), nullable=False)
-    origen = db.Column(db.String(100), nullable=True)
-    foto_ruta = db.Column(db.String(200), nullable=True)
+    apellido = db.Column(db.String(100), nullable=True)
+    fechaNacimiento = db.Column(db.String(200), nullable=True)
+    poder = db.Column(db.String(100), nullable=True)
+    equipo = db.Column(db.String(100), nullable=True)
+    
 
     def __repr__(self):
         # Método para mostrar una representación legible del objeto (útil para debug)
