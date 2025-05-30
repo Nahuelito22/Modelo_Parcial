@@ -10,7 +10,6 @@ class VariedadUva(db.Model):
     habilidades = db.Column(db.String(100), nullable=True)
     actor = db.Column(db.String(200), nullable=True)
 
-    
 
     def __repr__(self):
         # Método para mostrar una representación legible del objeto (útil para debug)
