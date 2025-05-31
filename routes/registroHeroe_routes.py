@@ -1,7 +1,7 @@
 import uuid
 import os
 from werkzeug.utils import secure_filename
-from flask import Blueprint, flash, redirect, render_template, request, jsonify, abort
+from flask import Blueprint, flash, redirect, render_template, request, jsonify, abort, url_for
 from models.registroHeroe import Vengador
 from models.db import db
 
@@ -94,7 +94,7 @@ def update_vengador(id):
         flash("Error al actualizar el vengador", "error")
         return redirect(request.referrer)
     
-# DELETE / Eliminar un vengador
+"""# DELETE / Eliminar un vengador
 @heroes_bp.route("/<string:id>", methods=["DELETE"])    
 def delete_vengador(id):
     try:
@@ -110,9 +110,23 @@ def delete_vengador(id):
     except Exception as e:
         print(f"Error al eliminar el vengador: {e}")
         flash("Error al eliminar el vengador", "error")
-        return redirect(request.referrer)
+        return redirect(request.referrer)"""
 
 
 @heroes_bp.route("/agregar", methods=["GET"])
 def add_avenger_form():
     return render_template('avengers/agregar.html')
+
+@heroes_bp.route("/<string:id>/eliminar", methods=["POST"])
+def delete_vengador(id): # <--- Este es el nombre de la función que Jinja2 buscará
+    try:
+        vengador = Vengador.query.get(id)
+        db.session.delete(vengador)
+        db.session.commit()
+        flash("Vengador eliminado exitosamente.", "success")
+        return redirect(url_for('heroes_bp.listar'))
+    except Exception as e:
+        db.session.rollback()
+        print(f"Error al eliminar el vengador: {e}")
+        flash(f"Error al eliminar el vengador: {e}", "error")
+        return redirect (url_for('heroes_bp.get_vengador')) 

@@ -37,7 +37,12 @@
             {% endif %}
           </td>
           <td>{{ avn.actor }}</td> {# Corregido: Usar 'avn.actor' #}
-          
+          <td>
+      
+            <form action="{{ url_for('heroes_bp.delete_vengador', id=avn.id) }}" method="POST" style="display: inline;" onsubmit="return confirm('¿Estás seguro que quieres eliminar a {{ avn.alias }}?');">
+              <button type="submit" class="btn btn-outline-danger btn-sm">Eliminar</button>
+            </form>
+          </td>
         </tr>
         {% else %} {# Este bloque se ejecuta si 'vengadores' está vacía #}
         <tr>
