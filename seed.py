@@ -1,50 +1,38 @@
-# app.py
-import json 
-import uuid 
-from pathlib import Path 
-from flask import Flask , render_template
-from config.config import Config 
+# seed.py
+import json
+import uuid
+from pathlib import Path
+from app import create_app 
 from models.db import db
-from models.registroHeroe import Vengador
-from routes.registroHeroe_routes import heroes_bp 
+from models.registroHeroe import Vengador 
 
 
-# Creamos la app, configuraciones e importaciones
-app = Flask(__name__)
-
-# Definimos la ruta al archivo JSON
-
-JSON_FILE_PATH = Path(__file__).parent / "avengers.json"
-
-def create_app():
-    
-    # Cargamos la configuracion
-    app.config.from_object(Config)
-    
-    # Inicializamos base de datos
-    db.init_app(app)
+def seed_database():
+    """
+    Carga datos desde avengers.json y los inserta en la base de datos.
+    """
+    app = create_app() # Creamos una instancia de la app para obtener el contexto
     
     with app.app_context():
-        # db.drop_all() # Para borrar todo en testint
-        db.create_all() 
+        # Ruta al archivo JSON
+        
+        JSON_FILE_PATH = Path(__file__).parent / "avengers.json"
 
-        # AQUI ES DONDE CARGAMOS EL JSON Y POBLAMOS LA BASE DE DATOS 
         try:
             # Solo poblar si la tabla Vengador está vacía
             if Vengador.query.count() == 0:
                 print(f"[{__name__}] La tabla Vengador está vacía. Procediendo a cargar datos desde avengers.json...")
                 with open(JSON_FILE_PATH, "r", encoding="utf-8") as f:
                     data_from_json = json.load(f)
-                    avengers_list = data_from_json.get("avengers", []) 
+                    avengers_list = data_from_json.get("avengers", [])
                 
                 if avengers_list:
                     for hero_data in avengers_list:
-            
                         new_vengador = Vengador(
-                            id=str(uuid.uuid4()), # Genera un ID único para cada vengador
+                            id=str(uuid.uuid4()), 
                             nombre=hero_data.get("nombre"),
                             alias=hero_data.get("alias"),
-                            habilidades=str(hero_data.get("habilidades")), # Convertir la lista a string para la DB
+                            habilidades=str(hero_data.get("habilidades")), 
                             actor=hero_data.get("actor")
                         )
                         db.session.add(new_vengador)
@@ -61,20 +49,6 @@ def create_app():
             print(f"[{__name__}] Error: No se pudo decodificar el JSON de '{JSON_FILE_PATH.name}'. Revisa su formato.")
         except Exception as e:
             print(f"[{__name__}] Ocurrió un error inesperado al cargar o insertar datos de 'avengers.json': {e}")
-        # FIN DE LA CARGA DEL JSON
-        
-    # Registramos los blueprints
-    # Asegúrate de que 'heroes_bp' es el nombre que usaste en registroHeroe_routes.py
-    app.register_blueprint(heroes_bp, url_prefix="/vengador")
-    
-    return app
 
-#visualizamos index
-@app.route("/")
-def index():
-    return render_template("index.html")
-
-
-if __name__=="__main__":
-    app = create_app()
-    app.run(debug=True)
+if __name__ == '__main__':
+    seed_database()
