@@ -1,3 +1,4 @@
+# app.py
 # Importamos librerias, rutas y modelos
 from flask import Flask , render_template
 from config.config import Config 
@@ -5,16 +6,13 @@ from models.db import db
 from models import registroHeroe
 from routes.registroHeroe_routes import heroes_bp
 
-
-# Creamos la app, configuraciones e importaciones
 app = Flask(__name__)
 
 def create_app():
-    
-    # Cargamos la configuracion
+    """
+    Función para crear y configurar la aplicación Flask.
+    """
     app.config.from_object(Config)
-    
-    # Inicializamos base de datos
     db.init_app(app)
     
     with app.app_context():
@@ -24,15 +22,17 @@ def create_app():
     # Registramos los blueprints
     app.register_blueprint(heroes_bp, url_prefix="/heroes") # Se usa el url_prefix para acortar la ruta en routes y definirla directamente aca
 
+    app.register_blueprint(heroes_bp, url_prefix="/vengador") 
     
     return app
-#visualizamos index
+
+# Ruta principal para visualizar el index 
 @app.route("/")
 def index():
     return render_template("index.html")
 
 
-
 if __name__=="__main__":
-    app= create_app()
-    app.run(debug=True)
+    # Si este archivo se ejecuta directamente, creamos la app y la iniciamos
+    app = create_app()
+    app.run(debug=True) 

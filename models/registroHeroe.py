@@ -1,5 +1,5 @@
 import uuid
-from models.db import db  
+from models.db import db 
 
 class Vengador(db.Model):
     __tablename__ = 'Vengador'  # Nombre explícito para la tabla en la base de datos
@@ -7,7 +7,7 @@ class Vengador(db.Model):
     id = db.Column(db.String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
     nombre = db.Column(db.String(100), nullable=False)
     alias = db.Column(db.String(100), nullable=True)
-    habilidades = db.Column(db.String(100), nullable=True)
+    habilidades = db.Column(db.Text, nullable=True) 
     actor = db.Column(db.String(200), nullable=True)
 
 
