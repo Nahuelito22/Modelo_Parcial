@@ -22,7 +22,7 @@ def create_app():
     # Registramos los blueprints
     app.register_blueprint(heroes_bp, url_prefix="/heroes") # Se usa el url_prefix para acortar la ruta en routes y definirla directamente aca
 
-    app.register_blueprint(heroes_bp, url_prefix="/vengador") 
+    # app.register_blueprint(heroes_bp, url_prefix="/vengador") 
     
     return app
 
