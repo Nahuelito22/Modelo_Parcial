@@ -5,14 +5,7 @@
 {% block body %}
 <div class="row">
   <div class="col-md-5 p-5">
-    {% include 'partials/_message.html' %} 
-    
-    {# <h2 class="mb-4">Agregar Nuevo Avenger</h2> #}
-    {# <form action="{{ url_for('heroes_bp.add_avenger') }}" method="POST"> #}
-    {#     ... Campos del formulario ... #}
-    {#     <button type="submit" class="btn btn-success">Guardar Avenger</button> #}
-    {# </form> #}
-    <a href="{{ url_for('heroes_bp.add_avenger_form') }}" class="btn btn-primary mb-3">Agregar Nuevo Avenger</a>
+  
 
   </div>
   <div class="col-md-7 p-5">
@@ -40,18 +33,11 @@
               {% endfor %}
               </ul>
             {% else %}
-              {# Si habilidades no es una lista (ej. una cadena JSON sin parsear) #}
               {{ avn.habilidades }}
             {% endif %}
           </td>
           <td>{{ avn.actor }}</td> {# Corregido: Usar 'avn.actor' #}
-          <td>
-            {# Botones de acción para cada Avenger #}
-            <a href="{{ url_for('heroes_bp.edit_avenger', avenger_id=avn.id) }}" class="btn btn-outline-primary btn-sm me-2">Editar</a>
-            <form action="{{ url_for('heroes_bp.delete_avenger', avenger_id=avn.id) }}" method="POST" style="display: inline;" onsubmit="return confirm('¿Estás seguro que quieres eliminar a {{ avn.alias }}?');">
-              <button type="submit" class="btn btn-outline-danger btn-sm">Eliminar</button>
-            </form>
-          </td>
+          
         </tr>
         {% else %} {# Este bloque se ejecuta si 'vengadores' está vacía #}
         <tr>

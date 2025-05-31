@@ -1,0 +1,45 @@
+{% extends 'layout.html' %}
+
+{% block title %}Agregar Nuevo Avenger{% endblock %}
+
+{% block body %}
+<div class="row justify-content-center">
+    <div class="col-md-6 p-5">
+        <h2 class="mb-4 text-center">Registrar Nuevo Miembro Avenger</h2>
+        
+
+        <form action="{{ url_for('heroes_bp.create_vengador') }}" method="POST">
+            <div class="mb-3">
+                <label for="nombre" class="form-label">Nombre del Héroe:</label>
+                <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ej: Tony Stark" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="alias" class="form-label">Alias (Nombre de Héroe):</label>
+                <input type="text" class="form-control" id="alias" name="alias" placeholder="Ej: Iron Man" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="habilidades" class="form-label">Habilidades (separadas por comas):</label>
+                <input type="text" class="form-control" id="habilidades" name="habilidades" placeholder="Ej: genio, millonario, traje blindado">
+                <small class="form-text text-muted">Ingresa las habilidades separadas por comas (ej. "volar, fuerza, agilidad").</small>
+            </div>
+
+            <div class="mb-3">
+                <label for="actor" class="form-label">Actor:</label>
+                <input type="text" class="form-control" id="actor" name="actor" placeholder="Ej: Robert Downey Jr.">
+            </div>
+
+            {# Botones de Acción #}
+            <div class="d-grid gap-2 mt-4">
+                <button type="submit" class="btn btn-success btn-lg">
+                    <i class="fas fa-plus-circle me-2"></i> Guardar Nuevo Avenger
+                </button>
+                <a href="{{ url_for('heroes_bp.get_heroes') }}" class="btn btn-secondary btn-lg">
+                    <i class="fas fa-ban me-2"></i> Cancelar y Volver a la Lista
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
