@@ -72,3 +72,51 @@ pip install -r requirements.txt
 python app.py
 ```
 
+
+--------Proyecto Flask - CRUD de Héroes------
+Aplicación web simple en Flask para crear, listar, editar y eliminar héroes.
+
+--------Funcionalidades----------
+Cargar héroes desde un JSON (avengers.json)
+
+Crear héroes desde frontend (formulario)
+
+Listar y borrar héroes desde vistas HTML
+
+Modelo básico de rutas (GET, POST, PUT, DELETE)
+
+Plantillas con Jinja para mostrar e iterar datos
+
+⚠️ El proyecto está funcional, pero aún quedan ajustes menores, como mejorar los redirects y pulir detalles de navegación.
+
+#Contribuciones#
+🛠 Nahuel Ghilardi
+Estructura inicial del proyecto Flask
+
+Creación de modelos para la base de datos
+
+Definición de rutas principales (GET, POST, PUT, DELETE) en registroHeroe_routes.py
+
+Generación del seed (avengers.json) con datos de héroes para facilitar pruebas
+
+Pruebas básicas de funcionamiento backend
+
+🎨 Gustavo Garcia
+Configuración de la URI de conexión en el módulo de configuración (config/)
+
+Desarrollo de las plantillas HTML con Jinja2 para:
+
+Agregar nuevos héroes (agregar.html)
+
+Listar héroes (listar.html)
+
+Estructura general (layout.html, index.html)
+
+Iteración de datos desde el backend a las vistas
+
+Integración entre frontend y rutas para operar desde la interfaz
+
+Ajustes en el diseño con CSS (main.css)
+
+Organización del proyecto y estructura de carpetas
+
